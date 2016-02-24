@@ -1,0 +1,7 @@
+kafka:
+  broker:
+    host: localhost
+    port: 9092
+  zookeeper:
+    host: localhost
+    port: 2181
