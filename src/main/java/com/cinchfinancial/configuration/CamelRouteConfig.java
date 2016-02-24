@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 @Configuration
 public class CamelRouteConfig {
 
-    /*
-
     @Autowired
     private ProducerTemplate producerTemplate;
 
@@ -38,6 +36,6 @@ public class CamelRouteConfig {
         return new CinchKafkaConsumer("test", "camelTest", "log:gotakafka1message");
     }
 
-    */
+
 
 }

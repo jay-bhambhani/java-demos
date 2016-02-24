@@ -10,7 +10,7 @@ import org.apache.camel.model.RouteDefinition;
  * Created by jbhambhani on 2/23/16.
  */
 
-public class CinchKafkaConsumer extends RouteBuilder {
+public class CinchKafkaConsumer extends CinchKafkaRouter {
     private String topic;
     private String groupId;
     private String toUri;
@@ -28,18 +28,5 @@ public class CinchKafkaConsumer extends RouteBuilder {
                 .unmarshal(getFormat())
                 .to(this.toUri)
                 .to("log:sent?showAll=true");
-    }
-
-    public String router() {
-        KafkaRouteHelper kafkaRouteHelper = new KafkaRouteHelper(this.topic, this.groupId);
-        String routeString = kafkaRouteHelper.setRouteString();
-        return routeString;
-    }
-
-    public JacksonDataFormat getFormat() {
-        JacksonDataFormat format = new JacksonDataFormat(SimpleMessage.class);
-        format.disableFeature(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
-        return format;
     }
 }

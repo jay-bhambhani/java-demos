@@ -18,19 +18,16 @@ public class CamelHelperApplication { //implements CommandLineRunner {
 		SpringApplication.run(CamelHelperApplication.class, args);
 	}
 
-	/*
 	@Autowired
 	@Qualifier("kafkaTopic1Producer")
 	CinchMessageProducer messageProducer;
 
 	public void run(String... args) throws InterruptedException, JsonProcessingException {
 		SimpleMessage testMessage = new SimpleMessage("kafka test message topic1");
-		//ObjectMapper mapper = new ObjectMapper();
-		//String body = mapper.writeValueAsString(newUser);
 		while (true) {
 			messageProducer.send(testMessage);
 			Thread.sleep(1000);
 		}
 	}
-	*/
+
 }

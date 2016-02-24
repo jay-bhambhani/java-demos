@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * Created by jbhambhani on 2/23/16.
  */
-public class CinchKafkaProducer extends RouteBuilder implements CinchMessageProducer{
+public class CinchKafkaProducer extends CinchKafkaRouter implements CinchMessageProducer{
     private String topic;
     private String groupId;
     private ProducerTemplate kafkaProducer;
@@ -28,7 +28,8 @@ public class CinchKafkaProducer extends RouteBuilder implements CinchMessageProd
 
     }
 
-    @Override public void send(Object object) {
+    @Override
+    public void send(Object object) {
         this.kafkaProducer.sendBodyAndHeader("direct:" + this.uuid, object, KafkaConstants.PARTITION_KEY, "1");
     }
 
@@ -39,18 +40,5 @@ public class CinchKafkaProducer extends RouteBuilder implements CinchMessageProd
                 .to("log:sent?showAll=true");
     }
 
-
-    public String router() {
-        KafkaRouteHelper kafkaRouteHelper = new KafkaRouteHelper(this.topic, this.groupId);
-        String routeString = kafkaRouteHelper.setRouteString();
-        return routeString;
-    }
-
-    public JacksonDataFormat getFormat() {
-        JacksonDataFormat format = new JacksonDataFormat(SimpleMessage.class);
-        format.disableFeature(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
-        return format;
-    }
 
 }
