@@ -1,16 +1,12 @@
 package com.cinchfinancial.configuration;
 
-import com.cinchfinancial.routes.CinchKafkaConsumer;
-import com.cinchfinancial.routes.CinchKafkaProducer;
+import com.cinchfinancial.routes.consumers.CinchKafkaConsumer;
+import com.cinchfinancial.routes.producers.CinchKafkaProducer;
 import com.cinchfinancial.routes.CinchMessageProducer;
-import org.apache.camel.CamelContext;
-import org.apache.camel.CamelContextAware;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by jbhambhani on 2/23/16.

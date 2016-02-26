@@ -3,29 +3,20 @@ package com.cinchfinancial;
 
 import com.cinchfinancial.messages.MxMessage;
 import com.cinchfinancial.messages.SimpleMessage;
-import com.cinchfinancial.routes.CinchKafkaConsumer;
-import com.cinchfinancial.routes.CinchKafkaProducer;
+import com.cinchfinancial.routes.consumers.CinchKafkaConsumer;
+import com.cinchfinancial.routes.producers.CinchKafkaProducer;
 import com.cinchfinancial.routes.CinchMessageProducer;
 import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.kafka.KafkaComponent;
-import org.apache.camel.component.kafka.KafkaEndpoint;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.BootstrapWith;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CamelHelperApplication.class)

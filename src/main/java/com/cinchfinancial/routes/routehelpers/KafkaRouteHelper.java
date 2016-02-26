@@ -1,4 +1,4 @@
-package com.cinchfinancial.routes;
+package com.cinchfinancial.routes.routehelpers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,26 +9,26 @@ import java.text.MessageFormat;
 /**
  * Created by jbhambhani on 2/19/16.
  */
-public class KafkaRouteHelper {
+public class KafkaRouteHelper implements RouteHelper{
 
     private String topic;
 
     private String groupId;
 
 
-    //@Value("${kafka.broker.port}")
+    //@Value("${routers.broker.port}")
     @Value("9092")
     private int kafkaPort;
 
-    //@Value("${kafka.broker.host}")
+    //@Value("${routers.broker.host}")
     @Value("localhost")
     private String kafkaHost;
 
-    //@Value("${kafka.zookeeper.port}")
+    //@Value("${routers.zookeeper.port}")
     @Value("2181")
     private int zkPort;
 
-    //@Value("${kafka.zookeeper.host}")
+    //@Value("${routers.zookeeper.host}")
     @Value("localhost")
     private String zkHost;
 
@@ -45,9 +45,11 @@ public class KafkaRouteHelper {
     }
 
     @Bean
+    @Override
     public String setRouteString () {
-        System.out.println(kafkaPort);
-        String baseString = "kafka:%s:%d?topic=%s&zookeeperConnect=%s:%d&groupId=%s&serializerClass=kafka.serializer.StringEncoder";//&partitionerClass=org.apache.camel.component.kafka.partitioner.SimplePartitioner";
+        String baseString = "kafka:%s:%d?topic=%s&zookeeperHost=%s&zookeeperPort%d" +
+                "&groupId=%s&serializerClass=routers.serializer.StringEncoder" +
+                "&partitionerClass=org.apache.camel.component.routers.partitioner.SimplePartitioner";
         String routeString = String.format(baseString, this.kafkaHost,
                                             this.kafkaPort, this.topic, this.zkHost,
                                             this.zkPort, this.groupId);

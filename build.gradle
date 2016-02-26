@@ -35,6 +35,10 @@ dependencies {
 		exclude group: 'log4j', module: 'log4j'
 		exclude group: "org.slf4j", module:"slf4j-log4j12"
 	}
+	compile('org.apache.camel:camel-kafka:2.16.1'){
+		exclude group: 'log4j', module: 'log4j'
+		exclude group: "org.slf4j", module:"slf4j-log4j12"
+	}
 	compile('org.scala-lang:scala-library:2.11.7')
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }

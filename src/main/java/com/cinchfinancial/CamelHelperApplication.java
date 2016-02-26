@@ -23,7 +23,7 @@ public class CamelHelperApplication { //implements CommandLineRunner {
 	CinchMessageProducer messageProducer;
 
 	public void run(String... args) throws InterruptedException, JsonProcessingException {
-		SimpleMessage testMessage = new SimpleMessage("kafka test message topic1");
+		SimpleMessage testMessage = new SimpleMessage("routers test message topic1");
 		while (true) {
 			messageProducer.send(testMessage);
 			Thread.sleep(1000);
