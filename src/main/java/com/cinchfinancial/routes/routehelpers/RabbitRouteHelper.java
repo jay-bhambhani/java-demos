@@ -1,7 +1,12 @@
 package com.cinchfinancial.routes.routehelpers;
 
+import org.apache.camel.component.kafka.KafkaConstants;
+import org.apache.camel.component.rabbitmq.RabbitMQConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
 
 /**
  * Created by jbhambhani on 2/26/16.
@@ -42,5 +47,15 @@ public class RabbitRouteHelper implements RouteHelper {
         return routeString;
     }
 
-
+    /*
+    @Bean
+    @Override
+    public HashMap<String, Object> setConstants(String fieldName, String fieldValue) throws Exception {
+        HashMap<String, Object> headerMap = new HashMap<String, Object>();
+        Field fieldKey = RabbitMQConstants.class.getDeclaredField(fieldName);
+        String fieldString = fieldKey.getName();
+        headerMap.put(fieldString, fieldValue);
+        return headerMap;
+    }
+    */
 }

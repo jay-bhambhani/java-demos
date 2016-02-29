@@ -6,25 +6,32 @@ import com.cinchfinancial.routes.routehelpers.RouteHelper;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
+import org.apache.camel.component.kafka.KafkaConstants;
+import org.springframework.context.annotation.Bean;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
 
 /**
  * Created by jbhambhani on 2/24/16.
  */
 public class CinchRouter extends RouteBuilder {
 
-    private String topic;
-    private String groupId;
+    private RouteHelper routeHelper;
+    //private String topic;
+    //private String groupId;
 
     public CinchRouter() {}
 
-    public CinchRouter(String topic, String groupId) {
-        this.topic = topic;
-        this.groupId = groupId;
+    public CinchRouter(RouteHelper routeHelper) {
+        this.routeHelper = routeHelper;
+        //this.topic = topic;
+        //this.groupId = groupId;
     }
 
-    public void configure() {}
+    public void configure () {}
 
-    public String router(RouteHelper routeHelper) {
+    public String router () {     //RouteHelper routeHelper) {
         String routeString = routeHelper.setRouteString();
         return routeString;
     }
@@ -35,4 +42,18 @@ public class CinchRouter extends RouteBuilder {
 
         return format;
     }
+
+    /*
+    @Bean
+    public HashMap<String, Object> setConstants(String fieldName, Object fieldValue) throws Exception {
+        HashMap<String, Object> headerMap = new HashMap<String, Object>();
+
+        //Field fieldKey = KafkaConstants.class.getDeclaredField(fieldName);
+        //String fieldString = fieldKey.get();
+        headerMap.put(fieldName, fieldValue);
+        return headerMap;
+
+
+    }
+    */
 }
