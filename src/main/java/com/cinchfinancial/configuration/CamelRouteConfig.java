@@ -31,13 +31,18 @@ public class CamelRouteConfig {
     }
 
     @Bean
-    public CinchMessageProducer kafkaTopic2Producer() {
+    public CinchMessageProducer rabbitTopic1Producer() {
         return new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
     }
 
     @Bean
-    public CinchConsumer kafka1TopicConsumer() {
+    public CinchConsumer kafkaTopic1Consumer() {
         return new CinchConsumer(new KafkaRouteHelper("test", "camelTest"), "log:gotakafka1message");
+    }
+
+    @Bean
+    public CinchConsumer rabbitTopic1Consumer() {
+        return new CinchConsumer(new RabbitRouteHelper("test2", "direct", "camelTest2"), "log:gotarabbit1message");
     }
 
 
