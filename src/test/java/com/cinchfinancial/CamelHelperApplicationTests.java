@@ -3,9 +3,11 @@ package com.cinchfinancial;
 
 import com.cinchfinancial.messages.MxMessage;
 import com.cinchfinancial.messages.SimpleMessage;
-import com.cinchfinancial.routes.consumers.CinchKafkaConsumer;
-import com.cinchfinancial.routes.producers.CinchKafkaProducer;
+import com.cinchfinancial.routes.consumers.CinchConsumer;
+import com.cinchfinancial.routes.producers.CinchProducer;
 import com.cinchfinancial.routes.CinchMessageProducer;
+import com.cinchfinancial.routes.routehelpers.KafkaRouteHelper;
+import com.cinchfinancial.routes.routehelpers.RabbitRouteHelper;
 import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -33,7 +35,7 @@ public class CamelHelperApplicationTests {
 
     CinchMessageProducer kafkaTopic1Producer;
     CinchMessageProducer kafkaTopic2Producer;
-    CinchKafkaConsumer kafka1TopicConsumer;
+    CinchConsumer kafka1TopicConsumer;
 
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint endpoint;
@@ -41,9 +43,9 @@ public class CamelHelperApplicationTests {
 
 	@Before
 	public void before() throws Exception {
-        kafkaTopic1Producer = new CinchKafkaProducer("test", "camelTest", producerTemplate);
-        kafkaTopic2Producer = new CinchKafkaProducer("test2", "camelTest2", producerTemplate);
-        kafka1TopicConsumer = new CinchKafkaConsumer("test", "camelTest", "mock:result");
+        kafkaTopic1Producer = new CinchProducer(new KafkaRouteHelper("test", "camelTest"), producerTemplate);
+        kafkaTopic2Producer = new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
+        kafka1TopicConsumer = new CinchConsumer(new KafkaRouteHelper("test", "camelTest"), "mock:result");
 		camelContext.addRoutes((RouteBuilder) kafkaTopic1Producer);
 		camelContext.addRoutes((RouteBuilder) kafkaTopic2Producer);
         camelContext.addRoutes((RouteBuilder) kafka1TopicConsumer);

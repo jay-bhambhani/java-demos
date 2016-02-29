@@ -1,12 +1,17 @@
 package com.cinchfinancial.configuration;
 
-import com.cinchfinancial.routes.consumers.CinchKafkaConsumer;
-import com.cinchfinancial.routes.producers.CinchKafkaProducer;
+import com.cinchfinancial.routes.consumers.CinchConsumer;
+import com.cinchfinancial.routes.producers.CinchProducer;
 import com.cinchfinancial.routes.CinchMessageProducer;
+import com.cinchfinancial.routes.routehelpers.KafkaRouteHelper;
+import com.cinchfinancial.routes.routehelpers.RabbitRouteHelper;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.component.kafka.KafkaConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
 
 /**
  * Created by jbhambhani on 2/23/16.
@@ -19,17 +24,20 @@ public class CamelRouteConfig {
 
     @Bean
     public CinchMessageProducer kafkaTopic1Producer() {
-        return new CinchKafkaProducer("test", "camelTest", producerTemplate);
+        HashMap<String, Object> headerMap = new HashMap<String, Object>();
+        headerMap.put(KafkaConstants.DEFAULT_GROUP, "camelTest");
+        headerMap.put(KafkaConstants.TOPIC, "test");
+        return new CinchProducer(new KafkaRouteHelper("test", "camelTest"), producerTemplate);
     }
 
     @Bean
     public CinchMessageProducer kafkaTopic2Producer() {
-        return new CinchKafkaProducer("test2", "camelTest2", producerTemplate);
+        return new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
     }
 
     @Bean
-    public CinchKafkaConsumer kafka1TopicConsumer() {
-        return new CinchKafkaConsumer("test", "camelTest", "log:gotakafka1message");
+    public CinchConsumer kafka1TopicConsumer() {
+        return new CinchConsumer(new KafkaRouteHelper("test", "camelTest"), "log:gotakafka1message");
     }
 
 

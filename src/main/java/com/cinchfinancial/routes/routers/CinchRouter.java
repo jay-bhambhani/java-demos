@@ -36,7 +36,7 @@ public class CinchRouter extends RouteBuilder {
         return routeString;
     }
 
-    public JacksonDataFormat getFormat() {
+    public JacksonDataFormat getJsonFormat() {
         JacksonDataFormat format = new JacksonDataFormat(SimpleMessage.class);
         format.disableFeature(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 

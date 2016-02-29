@@ -7,20 +7,20 @@ import com.cinchfinancial.routes.routers.CinchRouter;
  * Created by jbhambhani on 2/23/16.
  */
 
-public class CinchKafkaConsumer extends CinchRouter {
+public class CinchConsumer extends CinchRouter {
     private RouteHelper routeHelper;
     private String toUri;
 
 
-    public CinchKafkaConsumer(RouteHelper routeHelper, String toUri) {
-        this.routeHelper = routeHelper;
+    public CinchConsumer(RouteHelper routeHelper, String toUri) {
+        super(routeHelper);
         this.toUri = toUri;
     }
 
     @Override
     public void configure() {
-        from(router(routeHelper))
-                .unmarshal(getFormat())
+        from(router())
+                .unmarshal(getJsonFormat())
                 .to(this.toUri)
                 .to("log:sent?showAll=true");
     }

@@ -13,16 +13,13 @@ import java.util.UUID;
 /**
  * Created by jbhambhani on 2/23/16.
  */
-public class CinchKafkaProducer extends CinchRouter implements CinchMessageProducer {
+public class CinchProducer extends CinchRouter implements CinchMessageProducer {
     private RouteHelper routeHelper;
-    private HashMap<String, Object> headerMap;
     private ProducerTemplate kafkaProducer;
     private String uuid;
 
-    public CinchKafkaProducer(RouteHelper routeHelper, HashMap<String, Object> headerMap,
-                              ProducerTemplate kafkaProducer) {
+    public CinchProducer(RouteHelper routeHelper, ProducerTemplate kafkaProducer) {
         super(routeHelper);
-        this.headerMap = headerMap;
         this.kafkaProducer = kafkaProducer;
         this.uuid = UUID.randomUUID().toString();
 
@@ -30,12 +27,16 @@ public class CinchKafkaProducer extends CinchRouter implements CinchMessageProdu
 
     @Override
     public void send(Object object) {
-        this.kafkaProducer.sendBodyAndHeaders("direct:" + this.uuid, object, this.headerMap);   //, KafkaConstants.PARTITION_KEY, "1");
+        this.kafkaProducer.sendBody("direct:" + this.uuid, object);   //, KafkaConstants.PARTITION_KEY, "1");
+    }
+
+    public void send(Object object, HashMap<String, Object> headerMap) {
+        this.kafkaProducer.sendBodyAndHeaders("direct:" + this.uuid, object, headerMap);   //, KafkaConstants.PARTITION_KEY, "1");
     }
 
     @Override
     public void configure() {
-        from("direct:" + this.uuid).marshal(getFormat()).convertBodyTo(String.class)
+        from("direct:" + this.uuid).marshal(getJsonFormat()).convertBodyTo(String.class)
                 .to(router())
                 .to("log:sent?showAll=true");
     }

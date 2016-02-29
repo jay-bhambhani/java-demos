@@ -25,13 +25,13 @@ public class RabbitRouteHelper implements RouteHelper {
     private int port;
 
 
-    public RabbitRouteHelper(String exchangeName, String exchangeType, String routingKey,
-                             String username, String password) {
+    public RabbitRouteHelper(String exchangeName, String exchangeType, String routingKey) {
+                             //String username, String password) {
         this.exchangeName = exchangeName;
         this.exchangeType = exchangeType;
         this.routingKey = routingKey;
-        this.username = username;
-        this.password = password;
+        //this.username = username;
+        //this.password = password;
         this.hostname = "localhost";
         this.port = 5672;
     }
@@ -42,8 +42,8 @@ public class RabbitRouteHelper implements RouteHelper {
         String baseString = "rabbitmq://%s:%d/%s?exchangeType=%s&routingKey=%s" +
                 "&username=%s&password=%s";
         String routeString = String.format(baseString, this.hostname,
-                this.port, this.exchangeName, this.exchangeType, this.routingKey,
-                this.username, this.password);
+                this.port, this.exchangeName, this.exchangeType, this.routingKey);
+                //this.username, this.password);
         return routeString;
     }
 
