@@ -39,8 +39,8 @@ public class RabbitRouteHelper implements RouteHelper {
     @Bean
     @Override
     public String setRouteString() {
-        String baseString = "rabbitmq://%s:%d/%s?exchangeType=%s&routingKey=%s" +
-                "&username=%s&password=%s";
+        String baseString = "rabbitmq://%s:%d/%s?exchangeType=%s&routingKey=%s"; //+
+                //"&username=%s&password=%s";
         String routeString = String.format(baseString, this.hostname,
                 this.port, this.exchangeName, this.exchangeType, this.routingKey);
                 //this.username, this.password);

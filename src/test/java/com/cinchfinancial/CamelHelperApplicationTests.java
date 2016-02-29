@@ -34,8 +34,9 @@ public class CamelHelperApplicationTests {
     ProducerTemplate producerTemplate;
 
     CinchMessageProducer kafkaTopic1Producer;
-    CinchMessageProducer kafkaTopic2Producer;
+    CinchMessageProducer rabbitTopic2Producer;
     CinchConsumer kafka1TopicConsumer;
+    CinchConsumer rabbitTopic2Consumer;
 
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint endpoint;
@@ -44,18 +45,21 @@ public class CamelHelperApplicationTests {
 	@Before
 	public void before() throws Exception {
         kafkaTopic1Producer = new CinchProducer(new KafkaRouteHelper("test", "camelTest"), producerTemplate);
-        kafkaTopic2Producer = new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
+        rabbitTopic2Producer = new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
         kafka1TopicConsumer = new CinchConsumer(new KafkaRouteHelper("test", "camelTest"), "mock:result");
 		camelContext.addRoutes((RouteBuilder) kafkaTopic1Producer);
-		camelContext.addRoutes((RouteBuilder) kafkaTopic2Producer);
+		camelContext.addRoutes((RouteBuilder) rabbitTopic2Producer);
         camelContext.addRoutes((RouteBuilder) kafka1TopicConsumer);
+        camelContext.addRoutes((RouteBuilder) rabbitTopic2Consumer);
 	}
 
 	@Test
 	public void testKafkaRoute () throws Exception{
         endpoint.expectedMessageCount(1);
 		SimpleMessage simpleMessage = new MxMessage(99999, 1, "new mx message");
+        SimpleMessage simpleMessage2 = new MxMessage(99999, 1, "new mx message");
         kafkaTopic1Producer.send(simpleMessage);
+        rabbitTopic2Producer.send(simpleMessage2);
         endpoint.assertIsSatisfied();
         Exchange exchange = endpoint.getExchanges().get(0);
         Object in = exchange.getIn().getBody();
