@@ -19,6 +19,7 @@ import java.util.HashMap;
 @Configuration
 public class CamelRouteConfig {
 
+
     @Autowired
     private ProducerTemplate producerTemplate;
 

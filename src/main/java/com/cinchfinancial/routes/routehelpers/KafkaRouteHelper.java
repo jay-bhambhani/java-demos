@@ -53,9 +53,9 @@ public class KafkaRouteHelper implements RouteHelper{
     @Bean
     @Override
     public String setRouteString () {
-        String baseString = "kafka:%s:%d?topic=%s&zookeeperHost=%s&zookeeperPort%d" +
+        String baseString = "kafka:%s:%d?topic=%s&zookeeperHost=%s&zookeeperPort=%d" +
                 "&groupId=%s&serializerClass=kafka.serializer.StringEncoder" +
-                "&partitionerClass=com.cinchfinancial.partitioners.SimplePartitioner";
+                "&partitioner=com.cinchfinancial.partitioners.SimplePartitioner";
         String routeString = String.format(baseString, this.kafkaHost,
                                             this.kafkaPort, this.topic, this.zkHost,
                                             this.zkPort, this.groupId);
