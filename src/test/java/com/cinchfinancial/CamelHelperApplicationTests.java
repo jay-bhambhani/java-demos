@@ -47,7 +47,8 @@ public class CamelHelperApplicationTests {
         kafkaTopic1Producer = new CinchProducer(new KafkaRouteHelper("test", "camelTest"), producerTemplate);
         //rabbitTopic2Producer = new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
         kafka1TopicConsumer = new CinchConsumer(new KafkaRouteHelper("test", "camelTest"), "mock:result");
-		camelContext.addRoutes((RouteBuilder) kafkaTopic1Producer);
+		//rabbitTopic2Consumer = new CinchConsumer(new RabbitRouteHelper("test2", "direct", "camelTest2"), "mock:result");
+        camelContext.addRoutes((RouteBuilder) kafkaTopic1Producer);
 		//camelContext.addRoutes((RouteBuilder) rabbitTopic2Producer);
         camelContext.addRoutes((RouteBuilder) kafka1TopicConsumer);
         //camelContext.addRoutes((RouteBuilder) rabbitTopic2Consumer);
