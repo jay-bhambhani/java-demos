@@ -8,6 +8,10 @@ import java.util.HashMap;
  */
 public interface RouteHelper {
 
+    /**
+     * every route helper must set a route string
+     * @return string route string
+     */
     String setRouteString();
     //HashMap<String, Object> setConstants(String fieldName, String fieldValue) throws Exception;
 }

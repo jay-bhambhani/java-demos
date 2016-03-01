@@ -2,7 +2,6 @@ package com.cinchfinancial.configuration;
 
 import com.cinchfinancial.routes.consumers.CinchConsumer;
 import com.cinchfinancial.routes.producers.CinchProducer;
-import com.cinchfinancial.routes.CinchMessageProducer;
 import com.cinchfinancial.routes.routehelpers.KafkaRouteHelper;
 import com.cinchfinancial.routes.routehelpers.RabbitRouteHelper;
 import org.apache.camel.ProducerTemplate;
@@ -24,7 +23,7 @@ public class CamelRouteConfig {
     private ProducerTemplate producerTemplate;
 
     @Bean
-    public CinchMessageProducer kafkaTopic1Producer() {
+    public CinchProducer kafkaTopic1Producer() {
         HashMap<String, Object> headerMap = new HashMap<String, Object>();
         headerMap.put(KafkaConstants.DEFAULT_GROUP, "camelTest");
         headerMap.put(KafkaConstants.TOPIC, "test");
@@ -32,7 +31,7 @@ public class CamelRouteConfig {
     }
 
     @Bean
-    public CinchMessageProducer rabbitTopic1Producer() {
+    public CinchProducer rabbitTopic1Producer() {
         return new CinchProducer(new RabbitRouteHelper("test2", "direct", "camelTest2"), producerTemplate);
     }
 

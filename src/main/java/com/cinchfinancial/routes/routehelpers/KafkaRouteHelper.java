@@ -50,6 +50,10 @@ public class KafkaRouteHelper implements RouteHelper{
 
     }
 
+    /**
+     * sets route string
+     * @return string of messaging route
+     */
     @Bean
     @Override
     public String setRouteString () {
@@ -61,22 +65,5 @@ public class KafkaRouteHelper implements RouteHelper{
                                             this.zkPort, this.groupId);
         return routeString;
     }
-    /*
-    @Bean
-    @Override
-    public HashMap<String, Object> setConstants(String fieldName, String fieldValue) throws Exception {
-        HashMap<String, Object> headerMap = new HashMap<String, Object>();
-        Field fieldKey = KafkaConstants.class.getDeclaredField(fieldName);
-        String fieldString = fieldKey.getName();
-        headerMap.put(fieldString, fieldValue);
-        return headerMap;
 
-
-        Constructor<KafkaConstants> constructor = KafkaConstants.class.getDeclaredConstructor(new Class[0]);
-        constructor.setAccessible(true);
-        KafkaConstants kafkaConstants = constructor.newInstance(new Object[0]);
-        return kafkaConstants;
-
-    }
-    */
 }

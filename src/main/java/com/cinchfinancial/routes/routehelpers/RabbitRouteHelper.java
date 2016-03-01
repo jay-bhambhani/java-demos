@@ -36,6 +36,11 @@ public class RabbitRouteHelper implements RouteHelper {
         this.port = 5672;
     }
 
+    /**
+            * sets route string
+    * @return string of messaging route
+    */
+
     @Bean
     @Override
     public String setRouteString() {
@@ -47,15 +52,4 @@ public class RabbitRouteHelper implements RouteHelper {
         return routeString;
     }
 
-    /*
-    @Bean
-    @Override
-    public HashMap<String, Object> setConstants(String fieldName, String fieldValue) throws Exception {
-        HashMap<String, Object> headerMap = new HashMap<String, Object>();
-        Field fieldKey = RabbitMQConstants.class.getDeclaredField(fieldName);
-        String fieldString = fieldKey.getName();
-        headerMap.put(fieldString, fieldValue);
-        return headerMap;
-    }
-    */
 }

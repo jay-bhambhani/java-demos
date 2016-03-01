@@ -5,9 +5,7 @@ import com.cinchfinancial.messages.MxMessage;
 import com.cinchfinancial.messages.SimpleMessage;
 import com.cinchfinancial.routes.consumers.CinchConsumer;
 import com.cinchfinancial.routes.producers.CinchProducer;
-import com.cinchfinancial.routes.CinchMessageProducer;
 import com.cinchfinancial.routes.routehelpers.KafkaRouteHelper;
-import com.cinchfinancial.routes.routehelpers.RabbitRouteHelper;
 import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -33,7 +31,7 @@ public class CamelHelperApplicationTests {
     @Autowired
     ProducerTemplate producerTemplate;
 
-    CinchMessageProducer kafkaTopic1Producer;
+    CinchProducer kafkaTopic1Producer;
     //CinchMessageProducer rabbitTopic2Producer;
     CinchConsumer kafka1TopicConsumer;
     //CinchConsumer rabbitTopic2Consumer;

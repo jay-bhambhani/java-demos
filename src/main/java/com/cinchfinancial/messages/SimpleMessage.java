@@ -11,12 +11,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS,
         include = JsonTypeInfo.As.PROPERTY)
-/*
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = MxMessage.class)
-})
-*/
-
 public class SimpleMessage {
 
     private String message;

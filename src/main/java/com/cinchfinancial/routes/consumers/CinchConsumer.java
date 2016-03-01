@@ -17,6 +17,9 @@ public class CinchConsumer extends CinchRouter {
         this.toUri = toUri;
     }
 
+    /**
+     * hitches route created by routehelper to "from" string
+     */
     @Override
     public void configure() {
         from(router())
