@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @IntegrationTest
 //@ActiveProfiles("test")
 public class CamelHelperApplicationTests {
+    /*
 
 	@Autowired
     CamelContext camelContext;
@@ -65,5 +66,5 @@ public class CamelHelperApplicationTests {
         Assert.assertEquals(in.getClass(), MxMessage.class);
 
 	}
-
+*/
 }
